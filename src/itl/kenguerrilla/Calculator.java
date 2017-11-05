@@ -20,7 +20,7 @@ public class Calculator {
 	
 	public void show(){
 		
-		System.out.println("Status: sum1="+sum1+", mode="+mode);
+		System.out.println("Status: sum1="+sum1+", mode@@@="+mode);
 	}
 	
 	public Double checkIn(actionMode newMode,Double num){
