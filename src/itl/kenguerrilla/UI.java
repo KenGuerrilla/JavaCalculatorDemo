@@ -17,7 +17,7 @@ public class UI extends JFrame implements ActionListener {
 	
 	private JMenuBar menuBar;
 	private JMenu aboutMenu;
-	private JMenuItem menuAbout;
+	private JMenuItem aboutMe;
 	
 	private String resultBuffer="";
 	private String keyingBuffer="";
@@ -68,9 +68,21 @@ public class UI extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		
 		aboutMenu = new JMenu("關於");
-		menuAbout = new JMenuItem("關於JavaCalDemo");
-		aboutMenu.add(menuAbout);
+		aboutMe = new JMenuItem("關於我");
+		aboutMenu.add(aboutMe);
 		
+		aboutMe.addActionListener(event -> {
+			JOptionPane.showOptionDialog(
+					null,
+					"由KenGuerrilla撰寫",
+					"關於CalculatorDemo",
+					JOptionPane.DEFAULT_OPTION,
+					JOptionPane.INFORMATION_MESSAGE,
+					null,
+					null,
+					null);
+		});	
+
 	}
 
 	// init Frame
@@ -145,6 +157,7 @@ public class UI extends JFrame implements ActionListener {
 		btnDiv.addActionListener(this);
 		btnClear.addActionListener(this);
 		
+
 		numberPanel.add(btnDot).setFont(font);
 		numberPanel.add(but[0]).setFont(font);
 		numberPanel.add(btnEqual).setFont(font);
