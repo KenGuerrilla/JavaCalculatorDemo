@@ -11,6 +11,11 @@ import javax.swing.*;
 public class UI extends JFrame implements ActionListener {
 	
 	/**
+	 * Test git remote rebase
+	 * 
+	 * add line for test remote
+	 * 
+	 * add line for test2 remote
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
@@ -48,7 +53,6 @@ public class UI extends JFrame implements ActionListener {
 		initFrame();
 		initLab();
 		initKey();
-		
 		initAboutMenu();
 		initMenuBar();
 		
