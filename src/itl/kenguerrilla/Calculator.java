@@ -1,96 +1,129 @@
 package itl.kenguerrilla;
 
 public class Calculator {
-	
-	
-//#######################
-//
-//	暫時擱置 
-//
-//#######################
-	
-	private Double sum1=0.0,buffer=0.0;
-	private actionMode mode = actionMode.None;
-	
-	
+
+	private Double sum;
+	private String keyingLog=""; // 紀錄計算過程
+	private actionMode mode; //物件的狀態
+
 	public enum actionMode{
-		Add,Sub,Mul,Div,None		
+		Add,Sub,Mul,Div,None;	
 	}
 	
-	
-	public void show(){
-		
-		System.out.println("Status: sum1="+sum1+", mode@@@="+mode);
+	Calculator(){
+		sum = 0.0;
+		mode = actionMode.None;
 	}
 	
-	public Double checkIn(actionMode newMode,Double num){
+	// 傳入傳出的數值皆為Double
+	// 透過物件本身的mode狀態進行判斷與計算
+	// 參數計算後要及時回傳目前的結果
+
+	public Double checkIn(Double num,actionMode newMode){
 		
-		if(mode == actionMode.None){
-			
-			sum1 = num;
-			mode = newMode;
-			System.out.println("num="+num);
+		if(num.isNaN()){ // 避免傳入cal字串為空而發生的錯誤
 			return Double.NaN;
-			
+		}
+		
+		calcula(num);
+		mode = newMode;
+		show();
+		return sum;
+		
+	}
+	
+	public String checkIn(String num,actionMode newMode){
+		
+		if(num==""){ // 避免傳入cal字串為空而發生的錯誤
+			return checkType(sum);
+		}
+		
+		calcula(Double.valueOf(num));
+		mode = newMode;
+		show();
+		return checkType(sum);
+	}
+	
+	
+	private String checkType(Double sum){
+		
+		if(sum%1==0){
+			//System.out.println("轉換Double");
+			return String.valueOf(sum.intValue());
 		}
 		else{
-			buffer = num;
-			sum1 = functionAct();
-			mode = newMode;
-			return sum1;
-			
+			//System.out.println("不轉換Double");
+			return String.valueOf(sum);
 		}
-		
+
 	}
 	
 	
-	public Double functionAct(){
-		
-		show();
-		
+	private void calcula(Double d){
+	
 		switch(mode){
-			
+		
+			case None:
+				keyingRecord(checkType(d));
+				sum = d;
+				break;
+				
 			case Add:
-				System.out.println("num="+buffer);
-			return sum1 += buffer;
-			
+				keyingRecord("+"+checkType(d));
+				sum += d;
+				break;				
+				
 			case Sub:
-				System.out.println("num="+buffer);
-			return sum1 -= buffer;
-
-			
+				keyingRecord("-"+checkType(d));
+				sum -= d;
+				break;
+				
 			case Mul:
-				System.out.println("num="+buffer);
-			return sum1 *= buffer;
-
-			
+				keyingRecord("*"+checkType(d));
+				sum *= d;
+				break;	
+				
 			case Div:
-				System.out.println("num="+buffer);
-			return sum1 /= buffer;
-			
+				keyingRecord("/"+checkType(d));
+				sum /= d;
+				break;
+				
 			default:
-
-			throw new Error();
-
+				throw new Error();		
 		}
+			 
 	}
 	
-	public Double reset(){
+	private void keyingRecord(String s){
 		
-        sum1 = 0.0;
-        buffer = 0.0;
+		keyingLog += s;
+		
+	}
+	
+	public String getProcessString(){
+		
+		return keyingLog;
+	}
+	
+	public String getResult(){
+		
+		return checkType(sum);
+	}
+	
+	public void reset(){
+		
+        sum = 0.0;
+        keyingLog ="";
         mode = actionMode.None;
-
-        return Double.NaN;
+        show();
+        
 	}
 	
-	
-	public Double anser(Double num){
-		
-		return checkIn(actionMode.None, num);
+	public void show(){
+		System.out.println("-----------Calculator-----------");
+		System.out.println("Status: sum="+sum+", mode="+mode+", keyingLog="+keyingLog);
+		System.out.println("--------------------------------");
 	}
-	
-
 
 
 }
