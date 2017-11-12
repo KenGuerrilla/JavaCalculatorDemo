@@ -12,6 +12,9 @@ public class UI extends JFrame implements ActionListener {
 	
 	/**
 	 * Test git remote rebase
+	 * 
+	 * add line for test remote
+	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
