@@ -121,7 +121,7 @@ public class Calculator {
 	
 	public void show(){
 		System.out.println("-----------Calculator-----------");
-		System.out.println("Status: sum="+sum+", mode="+mode+", keyingLog="+keyingLog);
+		System.out.println("mode="+mode+", keyingLog="+keyingLog);
 		System.out.println("--------------------------------");
 	}
 
