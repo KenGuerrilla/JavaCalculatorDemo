@@ -22,26 +22,30 @@ public class Calculator {
 	public Double checkIn(Double num,actionMode newMode){
 		
 		if(num.isNaN()){ // 避免傳入cal字串為空而發生的錯誤
+			mode = newMode;
 			return Double.NaN;
 		}
-		
-		calcula(num);
-		mode = newMode;
-		show();
-		return sum;
-		
+		else{
+			calcula(num);
+			mode = newMode;
+			show();
+			return sum;
+		}
+				
 	}
 	
 	public String checkIn(String num,actionMode newMode){
 		
 		if(num==""){ // 避免傳入cal字串為空而發生的錯誤
+			mode = newMode;
 			return checkType(sum);
 		}
-		
-		calcula(Double.valueOf(num));
-		mode = newMode;
-		show();
-		return checkType(sum);
+		else{
+			calcula(Double.valueOf(num));
+			mode = newMode;
+			show();
+			return checkType(sum);
+		}
 	}
 	
 	
@@ -100,13 +104,19 @@ public class Calculator {
 		
 	}
 	
-	public String getProcessString(){
+	public String getKeyingLog(){
 		
 		return keyingLog;
 	}
 	
+	public actionMode getMode(){
+		return mode;
+	}
+	
 	public String getResult(){
 		
+		mode = actionMode.None;
+		show();
 		return checkType(sum);
 	}
 	
